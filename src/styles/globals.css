@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+@layer base {
+  .layout {
+    max-width: 70.85rem;
+    @apply mx-auto w-[95.85%];
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
