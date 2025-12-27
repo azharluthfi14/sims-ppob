@@ -1,8 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AtSign, Eye, EyeOff, LockKeyhole, User } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { IconAt, IconEye, IconEyeOff, IconLock, IconUser } from '@/components/icons';
 import { Button, Input } from '@/components/ui';
 import { type RegisterForm, registerForm } from '@/store/modules/auth';
 import { cn } from '@/utils/cn';
@@ -35,11 +35,11 @@ export const FormRegister = ({ onSubmit, isLoading }: Props) => {
             {...register('email')}
           />
           <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
-            <AtSign className="size-4 text-gray-400" />
+            <IconAt className={cn('size-4', errors.email ? 'text-danger' : 'text-gray-400')} />
           </div>
         </div>
         {errors.email && (
-          <div className="mt-2 text-right text-xs text-red-500">{errors.email.message}</div>
+          <div className="text-danger mt-2 text-right text-xs">{errors.email.message}</div>
         )}
       </div>
       <div>
@@ -51,11 +51,13 @@ export const FormRegister = ({ onSubmit, isLoading }: Props) => {
             {...register('first_name')}
           />
           <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
-            <User className="size-4 text-gray-400" />
+            <IconUser
+              className={cn('size-4', errors.first_name ? 'text-danger' : 'text-gray-400')}
+            />
           </div>
         </div>
         {errors.first_name && (
-          <div className="mt-2 text-right text-xs text-red-500">{errors.first_name.message}</div>
+          <div className="text-danger mt-2 text-right text-xs">{errors.first_name.message}</div>
         )}
       </div>
       <div>
@@ -67,11 +69,13 @@ export const FormRegister = ({ onSubmit, isLoading }: Props) => {
             {...register('last_name')}
           />
           <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
-            <User className="size-4 text-gray-400" />
+            <IconUser
+              className={cn('size-4', errors.last_name ? 'text-danger' : 'text-gray-400')}
+            />
           </div>
         </div>
         {errors.last_name && (
-          <div className="mt-1 text-right text-xs text-red-500">{errors.last_name.message}</div>
+          <div className="text-danger mt-1 text-right text-xs">{errors.last_name.message}</div>
         )}
       </div>
       <div>
@@ -83,20 +87,20 @@ export const FormRegister = ({ onSubmit, isLoading }: Props) => {
             {...register('password')}
           />
           <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
-            <LockKeyhole className="size-4 text-gray-400" />
+            <IconLock className={cn('size-4', errors.password ? 'text-danger' : 'text-gray-400')} />
           </div>
           <div
             onClick={() => setShowPassword(!showPassword)}
             className="absolute inset-y-0 end-0 flex cursor-pointer items-center pr-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
             {showPassword ? (
-              <Eye className="size-4 text-gray-400" />
+              <IconEye className="size-4 text-gray-400" />
             ) : (
-              <EyeOff className="size-4 text-gray-400" />
+              <IconEyeOff className="size-4 text-gray-400" />
             )}
           </div>
         </div>
         {errors.password && (
-          <div className="mt-1 text-right text-xs text-red-500">{errors.password.message}</div>
+          <div className="text-danger mt-1 text-right text-xs">{errors.password.message}</div>
         )}
       </div>
       <div>
@@ -111,20 +115,22 @@ export const FormRegister = ({ onSubmit, isLoading }: Props) => {
             {...register('confirm_password')}
           />
           <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
-            <LockKeyhole className="size-4 text-gray-400" />
+            <IconUser
+              className={cn('size-4', errors.confirm_password ? 'text-danger' : 'text-gray-400')}
+            />{' '}
           </div>
           <div
             onClick={() => setConfirmShowPassword(!showConfirmPassword)}
             className="absolute inset-y-0 end-0 flex cursor-pointer items-center pr-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
             {showConfirmPassword ? (
-              <Eye className="size-4 text-gray-400" />
+              <IconEye className="size-4 text-gray-400" />
             ) : (
-              <EyeOff className="size-4 text-gray-400" />
+              <IconEyeOff className="size-4 text-gray-400" />
             )}
           </div>
         </div>
         {errors.confirm_password && (
-          <div className="mt-1 text-right text-xs text-red-500">
+          <div className="text-danger mt-1 text-right text-xs">
             {errors.confirm_password.message}
           </div>
         )}

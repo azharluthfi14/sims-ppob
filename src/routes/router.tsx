@@ -75,7 +75,7 @@ export default function AppRouter() {
         position="bottom-left"
         toastOptions={{
           classNames: {
-            error: cn('bg-red-50! text-red-500! shadow-none! border-transparent!'),
+            error: cn('bg-red-50! text-danger! shadow-none! border-transparent!'),
             success: cn('bg-emerald-50! text-emerald-500! shadow-none! border-transparent!'),
           },
         }}

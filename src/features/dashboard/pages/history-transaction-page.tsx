@@ -1,5 +1,4 @@
-import { FileText, Loader2 } from 'lucide-react';
-
+import { IconDocs, IconLoader } from '@/components/icons';
 import { Button } from '@/components/ui';
 import { useGetHistoryTransactionInfiniteQuery } from '@/store/modules';
 
@@ -25,12 +24,12 @@ export default function HistoryTransactionPage() {
       <div className="space-y-3">
         {isLoading ? (
           <div className="flex h-60 flex-col items-center justify-center">
-            <Loader2 className="mb-4 size-10 animate-spin text-red-500" />
+            <IconLoader className="text-danger mb-4 size-10 animate-spin" />
             <div className="text-gray-400">Loading...</div>
           </div>
         ) : transactions.length <= 0 ? (
           <div className="flex h-60 flex-col items-center justify-center space-y-3">
-            <FileText className="size-10 text-gray-400" />
+            <IconDocs className="size-10 text-gray-400" />
             <div className="text-gray-400">Tidak ada transaksi</div>
           </div>
         ) : (

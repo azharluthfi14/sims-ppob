@@ -50,7 +50,7 @@ export const registerForm = z
     email: z.email('Alamat email tidak valid').min(1, 'Alamat email tidak boleh kosong'),
     first_name: z.string().min(1, 'Nama depan tidak boleh kosong'),
     last_name: z.string().min(1, 'Nama belakang tidak boleh kosong'),
-    password: z.string().min(8, 'Password tidak boleh kosong').max(18),
+    password: z.string().min(8, 'Password minimal 8 karakter'),
     confirm_password: z.string().min(1, 'Konfirmasi password tidak boleh kosong').max(18),
   })
   .refine((data) => data.password === data.confirm_password, {

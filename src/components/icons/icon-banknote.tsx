@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn';
 
 import type { IconProps } from './types';
 
-export default function IconEye({ className, ...props }: IconProps) {
+export default function IconBanknote({ className, ...props }: IconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -14,8 +14,9 @@ export default function IconEye({ className, ...props }: IconProps) {
       strokeLinejoin="round"
       className={cn('size-6 text-gray-800', className)}
       {...props}>
-      <path d="M2.062 12.348a1 1 0 010-.696 10.75 10.75 0 0119.876 0 1 1 0 010 .696 10.75 10.75 0 01-19.876 0" />
-      <circle cx={12} cy={12} r={3} />
+      <rect width={20} height={12} x={2} y={6} rx={2} />
+      <circle cx={12} cy={12} r={2} />
+      <path d="M6 12h.01M18 12h.01" />
     </svg>
   );
 }

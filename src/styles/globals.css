@@ -1,5 +1,12 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-danger: #f5261b;
+  --color-muted: #d0d4db;
+  --color-success: #00bc7d;
+  --color-background: #030712;
+}
+
 @layer base {
   .layout {
     max-width: 70.85rem;

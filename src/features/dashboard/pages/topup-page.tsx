@@ -1,17 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Banknote } from 'lucide-react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
+import { IconBanknote } from '@/components/icons';
 import { Button, Input } from '@/components/ui';
 import { type TopUpAmountFormInput, topUpSchema, useTopUpMutation } from '@/store/modules';
 import { cn } from '@/utils/cn';
 import { formatRupiah, unformatRupiah } from '@/utils/format';
 
-import { ModalConfirm } from '../components/modal-confirm';
-import { ModalFailed } from '../components/modal-failed';
-import { ModalSuccess } from '../components/modal-success';
+import { ModalConfirm, ModalFailed, ModalSuccess } from '../components';
 
 const AMOUNT_BUTTONS = [
   { id: 1, value: 10000 },
@@ -26,6 +24,7 @@ export default function TopupPage() {
   const [topUp, { isLoading }] = useTopUpMutation();
   const navigate = useNavigate();
 
+  const [selectedAmount, setSelectedAmount] = useState<null | { id: number; value: number }>(null);
   const [openModalConfirm, setOpenModalConfirm] = useState(false);
   const [openModalFailed, setOpenModalFailed] = useState(false);
   const [openModalSuccess, setOpenModalSuccess] = useState(false);
@@ -97,6 +96,7 @@ export default function TopupPage() {
                       onChange={(event) => {
                         const rawAmount = unformatRupiah(event.target.value);
                         field.onChange(rawAmount);
+                        setSelectedAmount(null);
                       }}
                       className={cn(
                         'h-10 rounded ps-12',
@@ -109,11 +109,13 @@ export default function TopupPage() {
                   className={cn(
                     'pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50'
                   )}>
-                  <Banknote className={cn('size-6 text-gray-400')} />
+                  <IconBanknote
+                    className={cn('size-6', errors.top_up_amount ? 'text-danger' : 'text-muted')}
+                  />
                 </div>
               </div>
               {errors.top_up_amount && (
-                <span className="text-xs text-red-500">{errors.top_up_amount.message}</span>
+                <span className="text-danger text-xs">{errors.top_up_amount.message}</span>
               )}
             </div>
             <Button
@@ -127,11 +129,17 @@ export default function TopupPage() {
           <div className="order-1 grid w-full grid-cols-3 gap-3 lg:order-2 lg:w-5/12">
             {AMOUNT_BUTTONS.map((amount) => (
               <Button
-                onClick={() => handleClickAmountPreset(amount.value)}
+                onClick={() => {
+                  handleClickAmountPreset(amount.value);
+                  setSelectedAmount({
+                    id: amount.id,
+                    value: amount.value,
+                  });
+                }}
                 key={amount.id}
                 size="lg"
                 className="cursor-pointer"
-                variant="outline">
+                variant={selectedAmount?.id === amount?.id ? 'default' : 'outline'}>
                 {new Intl.NumberFormat('id-ID', {
                   currency: 'IDR',
                   style: 'currency',

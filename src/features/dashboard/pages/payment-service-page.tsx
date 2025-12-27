@@ -1,9 +1,9 @@
-import { Banknote } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 
+import { IconBanknote } from '@/components/icons';
 import { Button, Input } from '@/components/ui';
 import type { RootState } from '@/store';
 import type { Service } from '@/store/modules';
@@ -89,7 +89,7 @@ export default function PaymentServicePage() {
               className={cn(
                 'pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50'
               )}>
-              <Banknote className={cn('size-4 text-gray-400')} />
+              <IconBanknote className={cn('size-4 text-gray-400')} />
             </div>
           </div>
           <Button

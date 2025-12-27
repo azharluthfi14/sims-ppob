@@ -1,6 +1,6 @@
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
-import { X } from 'lucide-react';
 
+import { IconX } from '@/components/icons';
 import { Button } from '@/components/ui';
 
 interface Props {
@@ -23,7 +23,7 @@ export const ModalFailed = ({ isOpen, amount, onClose, title }: Props) => {
             className="w-full max-w-xs flex-col rounded-xl bg-white p-6 duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0">
             <div className="mb-5 flex items-center justify-center">
               <div className="grid size-12 place-content-center rounded-full bg-red-500">
-                <X className="text-white" />
+                <IconX className="text-white" />
               </div>
             </div>
 
@@ -42,7 +42,7 @@ export const ModalFailed = ({ isOpen, amount, onClose, title }: Props) => {
               <Button
                 variant="ghost"
                 onClick={onClose}
-                className="w-full cursor-pointer text-red-500">
+                className="text-danger w-full cursor-pointer">
                 Kembali ke Beranda
               </Button>
             </div>

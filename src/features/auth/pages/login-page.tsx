@@ -31,7 +31,7 @@ export default function LoginPage() {
       <FormLogin onSubmit={handleSubmitLogin} isLoading={isLoading} />
       <div className="mt-6 text-center text-sm text-gray-400">
         belum punya akun? registrasi{' '}
-        <Link to="/register" className="font-semibold text-red-500">
+        <Link to="/register" className="text-danger font-semibold">
           di sini
         </Link>
       </div>

@@ -1,10 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AtSign, Pencil, User } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { toast } from 'sonner';
 
+import { IconAt, IconPencil, IconUser } from '@/components/icons';
 import { Navbar } from '@/components/layout/navbar';
 import { Button, Input } from '@/components/ui';
 import {
@@ -93,12 +93,14 @@ export default function ProfilePage() {
 
   const onUpdateProfileData = async () => {
     try {
-      await updateData({
+      const payload = {
         email: getValues('email'),
         first_name: getValues('first_name'),
         last_name: getValues('last_name'),
-      }).unwrap();
-      setIsEdit(false);
+      };
+      await updateData(payload).unwrap();
+
+      reset(payload);
       toast.success('Update profile sukses');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -120,6 +122,16 @@ export default function ProfilePage() {
       return () => URL.revokeObjectURL(preview);
     }
   }, [watchAvatarImage]);
+
+  useEffect(() => {
+    if (user) {
+      reset({
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+      });
+    }
+  }, [user, reset]);
 
   return (
     <>
@@ -144,7 +156,7 @@ export default function ProfilePage() {
                       {...register('profile_image')}
                     />
                     <div className="absolute end-0 bottom-2 grid size-7 place-content-center rounded-full border border-gray-200 bg-white">
-                      <Pencil className="size-4 text-gray-500" />
+                      <IconPencil className="size-4 text-gray-500" />
                     </div>
                   </label>
                 </div>
@@ -168,7 +180,7 @@ export default function ProfilePage() {
                       {...register('profile_image')}
                     />
                     <div className="absolute end-0 bottom-2 grid size-7 place-content-center rounded-full border border-gray-200 bg-white">
-                      <Pencil className="size-4 text-gray-500" />
+                      <IconPencil className="size-4 text-gray-500" />
                     </div>
                   </label>
                 </div>
@@ -176,7 +188,7 @@ export default function ProfilePage() {
             </div>
           </div>
           {errors.profile_image && (
-            <p className="text-xs text-red-500">{errors.profile_image.message}</p>
+            <p className="text-danger text-xs">{errors.profile_image.message}</p>
           )}
           <h1 className="my-6 text-3xl font-semibold capitalize">
             {user?.first_name + ' ' + user?.last_name}
@@ -207,16 +219,16 @@ export default function ProfilePage() {
                   className={cn(
                     'pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50'
                   )}>
-                  <AtSign
+                  <IconAt
                     className={cn(
                       'size-4',
-                      errorProfileData.email ? 'text-red-500' : 'text-gray-400'
+                      errorProfileData.email ? 'text-danger' : 'text-gray-400'
                     )}
                   />
                 </div>
               </div>
               {errorProfileData.email && (
-                <p className="mt-2 text-right text-xs text-red-500">
+                <p className="text-danger mt-2 text-right text-xs">
                   {errorProfileData.email.message}
                 </p>
               )}
@@ -246,16 +258,16 @@ export default function ProfilePage() {
                   className={cn(
                     'pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50'
                   )}>
-                  <User
+                  <IconUser
                     className={cn(
                       'size-4',
-                      errorProfileData.first_name ? 'text-red-500' : 'text-gray-400'
+                      errorProfileData.first_name ? 'text-danger' : 'text-gray-400'
                     )}
                   />
                 </div>
               </div>
               {errorProfileData.first_name && (
-                <p className="mt-2 text-right text-xs text-red-500">
+                <p className="text-danger mt-2 text-right text-xs">
                   {errorProfileData.first_name.message}
                 </p>
               )}
@@ -285,16 +297,16 @@ export default function ProfilePage() {
                   className={cn(
                     'pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50'
                   )}>
-                  <User
+                  <IconUser
                     className={cn(
                       'size-4',
-                      errorProfileData.last_name ? 'text-red-500' : 'text-gray-400'
+                      errorProfileData.last_name ? 'text-danger' : 'text-gray-400'
                     )}
                   />
                 </div>
               </div>
               {errorProfileData.last_name && (
-                <p className="mt-2 text-right text-xs text-red-500">
+                <p className="text-danger mt-2 text-right text-xs">
                   {errorProfileData.last_name.message}
                 </p>
               )}
@@ -306,7 +318,7 @@ export default function ProfilePage() {
                   <Button
                     variant={'outline'}
                     onClick={handleEdit}
-                    className="w-full cursor-pointer border-red-500 text-red-500"
+                    className="text-danger w-full cursor-pointer border-red-500"
                     size="lg">
                     Edit Profile
                   </Button>
@@ -327,7 +339,7 @@ export default function ProfilePage() {
                   <Button
                     variant={'outline'}
                     onClick={handleCancel}
-                    className="w-full cursor-pointer border-red-500 text-red-500"
+                    className="text-danger w-full cursor-pointer border-red-500"
                     size="lg">
                     Batalkan
                   </Button>

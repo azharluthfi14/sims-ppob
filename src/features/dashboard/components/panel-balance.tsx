@@ -1,6 +1,6 @@
-import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 
+import { IconEye, IconEyeOff } from '@/components/icons';
 import { Button } from '@/components/ui';
 
 interface Props {
@@ -14,7 +14,8 @@ export const PanelBalance = ({ amountBalance }: Props) => {
     <div className="relative h-full w-full overflow-clip rounded-2xl px-4 py-6 lg:max-w-xl">
       <img
         src="/images/bg-balance.png"
-        alt=""
+        alt="image-balance"
+        loading="lazy"
         className="absolute inset-0 h-full w-full scale-[148%] object-fill"
       />
 
@@ -28,7 +29,7 @@ export const PanelBalance = ({ amountBalance }: Props) => {
               minimumFractionDigits: 0,
             }).format(+amountBalance)
           ) : (
-            <span>••••••••••</span>
+            <span>••••••</span>
           )}
         </h1>
         <div className="flex items-center text-sm text-white">
@@ -38,7 +39,11 @@ export const PanelBalance = ({ amountBalance }: Props) => {
             variant="ghost"
             size="icon"
             className="cursor-pointer">
-            {showBalance ? <Eye className="size-4" /> : <EyeOff className="size-4" />}
+            {showBalance ? (
+              <IconEye className="size-4 text-white" />
+            ) : (
+              <IconEyeOff className="size-4 text-white" />
+            )}
           </Button>
         </div>
       </div>

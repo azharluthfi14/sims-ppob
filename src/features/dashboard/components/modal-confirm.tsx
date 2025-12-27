@@ -49,7 +49,7 @@ export const ModalConfirm = ({
                 isLoading={isLoading}
                 variant="link"
                 onClick={() => onConfirm?.()}
-                className="w-full cursor-pointer text-red-500">
+                className="text-danger w-full cursor-pointer">
                 {confirmLabel}
               </Button>
               <Button

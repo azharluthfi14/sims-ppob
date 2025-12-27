@@ -1,7 +1,7 @@
-import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
+import { IconMenu, IconX } from '@/components/icons';
 import { cn } from '@/utils/cn';
 
 import { Button } from '../ui';
@@ -27,10 +27,7 @@ export const Navbar = () => {
             <NavLink to={nav.path} key={nav.id}>
               {({ isActive }) => (
                 <span
-                  className={cn(
-                    'text-sm font-medium',
-                    isActive ? 'text-red-500' : 'text-gray-800'
-                  )}>
+                  className={cn('text-sm font-medium', isActive ? 'text-danger' : 'text-gray-800')}>
                   {nav.name}
                 </span>
               )}
@@ -41,7 +38,7 @@ export const Navbar = () => {
           size="icon-lg"
           onClick={() => setOpen(true)}
           className="flex cursor-pointer lg:hidden">
-          <Menu className="size-6" />
+          <IconMenu className="size-6" />
         </Button>
         <MobileSidebar open={open} onClose={() => setOpen(false)} />
       </nav>
@@ -66,7 +63,7 @@ function MobileSidebar({ open, onClose }: { open: boolean; onClose: () => void }
         )}>
         <div className="flex h-16 items-center justify-between border-b border-gray-300 px-4">
           <Button size="icon" onClick={onClose} className="cursor-pointer">
-            <X className="size-5" />
+            <IconX className="size-5" />
           </Button>
         </div>
 
@@ -79,7 +76,7 @@ function MobileSidebar({ open, onClose }: { open: boolean; onClose: () => void }
               className={({ isActive }) =>
                 cn(
                   'rounded px-3 py-2 text-sm font-medium',
-                  isActive ? 'bg-red-50 text-red-500' : 'text-gray-700 hover:bg-gray-100'
+                  isActive ? 'text-danger bg-red-50' : 'text-gray-700 hover:bg-gray-100'
                 )
               }>
               {nav.name}

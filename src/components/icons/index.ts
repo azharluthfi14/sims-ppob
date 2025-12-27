@@ -1,5 +1,12 @@
 export { default as IconAt } from './icon-at';
+export { default as IconBanknote } from './icon-banknote';
+export { default as IconCheck } from './icon-check';
 export { default as IconDocs } from './icon-docs';
+export { default as IconEye } from './icon-eye';
+export { default as IconEyeOff } from './icon-eye-off';
 export { default as IconLoader } from './icon-loader';
+export { default as IconLock } from './icon-lock';
 export { default as IconMenu } from './icon-menu';
+export { default as IconPencil } from './icon-pencil';
+export { default as IconUser } from './icon-user';
 export { default as IconX } from './icon-x';
