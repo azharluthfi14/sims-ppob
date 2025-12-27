@@ -82,8 +82,8 @@ export const TopupPage = () => {
           <h1 className="text-2xl font-semibold">Nominal Top Up</h1>
         </div>
 
-        <div className="flex items-stretch gap-x-4">
-          <div className="w-7/12">
+        <div className="flex flex-col items-stretch gap-x-4 gap-y-10 lg:flex-row lg:gap-y-0">
+          <div className="order-2 w-full lg:order-1 lg:w-7/12">
             <div className="h-16">
               <div className="relative">
                 <Controller
@@ -124,7 +124,7 @@ export const TopupPage = () => {
               {isInValid ? 'Top Up' : 'Bayar'}
             </Button>
           </div>
-          <div className="grid w-5/12 grid-cols-3 gap-3">
+          <div className="order-1 grid w-full grid-cols-3 gap-3 lg:order-2 lg:w-5/12">
             {AMOUNT_BUTTONS.map((amount) => (
               <Button
                 onClick={() => handleClickAmountPreset(amount.value)}

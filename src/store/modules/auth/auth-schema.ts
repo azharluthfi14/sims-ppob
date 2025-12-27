@@ -8,8 +8,8 @@ export const userSchema = z.object({
 });
 
 export const loginForm = z.object({
-  email: z.email(),
-  password: z.string().min(8),
+  email: z.email('Alamat email tidak valid').min(1, 'Alamat email tidak boleh kosong'),
+  password: z.string().min(1, 'Password tidak boleh kosong'),
 });
 
 export const loginResponseSchema = z.object({
@@ -21,9 +21,9 @@ export const loginResponseSchema = z.object({
 });
 
 export const updateProfileUserSchema = z.object({
-  email: z.string(),
-  first_name: z.string(),
-  last_name: z.string(),
+  email: z.email('Alamat email tidak valid').min(1, 'Alamat email tidak boleh kosong'),
+  first_name: z.string().min(1, 'Nama depan tidak boleh kosong'),
+  last_name: z.string().min(1, 'Nama belakang tidak boleh kosong'),
 });
 
 const MAX_IMAGE_SIZE = 100 * 1024;
@@ -31,13 +31,18 @@ const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png'];
 
 export const updateAvatarFormDataSchema = z.object({
   profile_image: z
-    .instanceof(File)
-    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), {
+    .instanceof(FileList)
+    .refine((file) => file.length === 1, 'Gambar tidak boleh lebih dari 1')
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file[0].type), {
       message: 'Format gambar harus JPEG atau PNG',
     })
-    .refine((file) => file.size <= MAX_IMAGE_SIZE, {
+    .refine((file) => file[0].size <= MAX_IMAGE_SIZE, {
       message: 'Ukuran gambar maksimal 100 KB',
     }),
+});
+
+export const updateAvatarPayloadScehma = z.object({
+  profile_image: z.instanceof(File),
 });
 
 export const registerForm = z

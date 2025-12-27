@@ -11,7 +11,7 @@ export const PanelBalance = ({ amountBalance }: Props) => {
   const [showBalance, setShowBalance] = useState(false);
 
   return (
-    <div className="relative h-full w-full max-w-xl overflow-clip rounded-2xl px-4 py-6">
+    <div className="relative h-full w-full overflow-clip rounded-2xl px-4 py-6 lg:max-w-xl">
       <img
         src="/images/bg-balance.png"
         alt=""

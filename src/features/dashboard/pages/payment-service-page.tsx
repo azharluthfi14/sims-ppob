@@ -2,6 +2,7 @@ import { Banknote } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'sonner';
 
 import { Button, Input } from '@/components/ui';
 import type { RootState } from '@/store';
@@ -9,9 +10,7 @@ import type { Service } from '@/store/modules';
 import { setService, useGetServicesQuery, useTransactionMutation } from '@/store/modules';
 import { cn } from '@/utils/cn';
 
-import { ModalConfirm } from '../components/modal-confirm';
-import { ModalFailed } from '../components/modal-failed';
-import { ModalSuccess } from '../components/modal-success';
+import { ModalConfirm, ModalFailed, ModalSuccess } from '../components';
 
 export const PaymentServicePage = () => {
   const dispatch = useDispatch();
@@ -33,11 +32,13 @@ export const PaymentServicePage = () => {
     try {
       await payment({
         service_code: selectedService && selectedService.code,
-      });
+      }).unwrap();
       setOpenModalConfirm(false);
       setOpenModalSuccess(true);
-    } catch {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       setOpenModalFailed(true);
+      toast.error(error.data.message);
     }
   };
 

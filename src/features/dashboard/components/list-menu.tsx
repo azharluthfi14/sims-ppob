@@ -7,12 +7,12 @@ interface Props {
 
 export const ListMenu = ({ services, handleClick }: Props) => {
   return (
-    <div className="layout grid grid-cols-12 gap-x-6">
+    <div className="layout no-scrollbar flex snap-x gap-x-4 overflow-x-scroll">
       {services?.map((service, i) => (
         <div
           onClick={() => handleClick(service)}
           key={i}
-          className="flex cursor-pointer flex-col items-center space-y-2">
+          className="flex w-20 shrink-0 cursor-pointer flex-col items-center space-y-2">
           <div>
             <img src={service.service_icon} alt="icon-service" className="size-16" />
           </div>

@@ -5,7 +5,6 @@ import type {
   LoginResponse,
   RegisterPayload,
   RegisterResponse,
-  UpdateAvatarPayload,
   UpdateProfileUserPayload,
   User,
 } from './auth-schema';
@@ -34,7 +33,7 @@ export const authApi = baseApi.injectEndpoints({
       providesTags: ['profile'],
       transformResponse: (response: { data: User }) => response.data,
     }),
-    updateAvatarProfile: builder.mutation<User, UpdateAvatarPayload>({
+    updateAvatarProfile: builder.mutation<User, FormData>({
       query: (fileImage) => ({
         url: '/profile/image',
         method: 'PUT',

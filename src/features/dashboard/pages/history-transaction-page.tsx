@@ -22,6 +22,7 @@ export const HistoryTransactionPage = () => {
       <div className="space-y-3">
         {transactions?.map((transaction) => (
           <CardTransaction
+            key={transaction.invoice_number}
             amount={transaction.total_amount}
             type={transaction.transaction_type}
             description={transaction.description}

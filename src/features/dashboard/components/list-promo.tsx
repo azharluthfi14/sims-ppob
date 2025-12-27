@@ -5,13 +5,13 @@ interface Props {
 }
 export const ListPromo = ({ banners }: Props) => {
   return (
-    <div className="space-y-6">
+    <div className="layout space-y-6">
       <div className="layout">
         <h2 className="font-semibold">Temukan promo menarik</h2>
       </div>
-      <div className="no-scrollbar flex w-full snap-x gap-x-6 overflow-x-auto pl-20">
+      <div className="no-scrollbar flex w-full snap-x gap-x-6 overflow-x-auto">
         {banners?.map((banner, i) => (
-          <div className="shrink-0 snap-center lg:last:pr-36" key={i}>
+          <div className="shrink-0 snap-center" key={i}>
             <img
               src={banner.banner_image}
               alt=""
