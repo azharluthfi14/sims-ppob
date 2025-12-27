@@ -39,7 +39,10 @@ export const ModalSuccess = ({ isOpen, amount, onClose, title }: Props) => {
               <p>berhasil!</p>
             </div>
             <div className="mt-4 space-y-2">
-              <Button variant="ghost" onClick={onClose} className="w-full text-red-500">
+              <Button
+                variant="ghost"
+                onClick={onClose}
+                className="w-full cursor-pointer text-red-500">
                 Kembali ke Beranda
               </Button>
             </div>

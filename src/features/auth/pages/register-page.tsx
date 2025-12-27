@@ -9,7 +9,7 @@ import {
 
 import { FormRegister } from '../components';
 
-export const RegisterPage = () => {
+export default function RegisterPage() {
   const [register, { isLoading }] = useRegisterMutation();
   const navigate = useNavigate();
   const handleSubmitRegister = async (value: RegisterForm) => {
@@ -43,4 +43,4 @@ export const RegisterPage = () => {
       </div>
     </div>
   );
-};
+}

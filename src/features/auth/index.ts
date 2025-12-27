@@ -1,2 +1,2 @@
-export * from './pages/login-page.tsx';
-export * from './pages/register-page.tsx';
+export { default as LoginPage } from './pages/login-page';
+export { default as RegisterPage } from './pages/register-page';

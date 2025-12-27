@@ -5,7 +5,7 @@ import { type LoginForm, useLoginMutation } from '@/store/modules/auth';
 
 import { FormLogin } from '../components';
 
-export const LoginPage = () => {
+export default function LoginPage() {
   const [login, { isLoading }] = useLoginMutation();
 
   const handleSubmitLogin = async (value: LoginForm) => {
@@ -37,4 +37,4 @@ export const LoginPage = () => {
       </div>
     </div>
   );
-};
+}

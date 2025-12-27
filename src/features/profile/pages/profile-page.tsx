@@ -19,7 +19,7 @@ import {
 } from '@/store/modules';
 import { cn } from '@/utils/cn';
 
-export const ProfilePage = () => {
+export default function ProfilePage() {
   const dispatch = useDispatch();
 
   const { data: user } = useGetProfileQuery();
@@ -339,4 +339,4 @@ export const ProfilePage = () => {
       </div>
     </>
   );
-};
+}

@@ -1,30 +1,36 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'sonner';
 
-import { AuthLayout } from '@/components/layout/auth-layout';
-import { LoadingLayout } from '@/components/layout/loading';
-import { MainLayout } from '@/components/layout/main-layout';
-import { LoginPage, RegisterPage } from '@/features/auth';
+import { AuthLayout, LoadingLayout, MainLayout } from '@/components/layout';
 import {
-  DashboardPage,
-  HistoryTransactionPage,
-  PaymentServicePage,
-  TopupPage,
-} from '@/features/dashboard';
-import { ProfilePage } from '@/features/profile';
-import type { RootState } from '@/store';
-import { restoreAuth, setInitialized, useGetProfileQuery } from '@/store/modules';
+  restoreAuth,
+  selectIsInitialized,
+  selectToken,
+  setInitialized,
+  useGetProfileQuery,
+} from '@/store/modules';
 import { cn } from '@/utils/cn';
 import { tokenStorage } from '@/utils/storage';
 
 import { ProtectedRoute } from './protected-route';
 import { PublicRoute } from './public-route';
 
+const LoginPage = lazy(() => import('@/features/auth/pages/login-page'));
+const RegisterPage = lazy(() => import('@/features/auth/pages/register-page'));
+const DashboardPage = lazy(() => import('@/features/dashboard/pages/dashboard-page'));
+const PaymentServicePage = lazy(() => import('@/features/dashboard/pages/payment-service-page'));
+const TopupPage = lazy(() => import('@/features/dashboard/pages/topup-page'));
+const HistoryTransactionPage = lazy(
+  () => import('@/features/dashboard/pages/history-transaction-page')
+);
+const ProfilePage = lazy(() => import('@/features/profile/pages/profile-page'));
+
 export default function AppRouter() {
   const dispatch = useDispatch();
-  const { isInitialized, token } = useSelector((state: RootState) => state.auth);
+  const isInitialized = useSelector(selectIsInitialized);
+  const token = useSelector(selectToken);
 
   const { isLoading } = useGetProfileQuery(undefined, {
     skip: !token,
@@ -46,23 +52,25 @@ export default function AppRouter() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<PublicRoute />}>
-          <Route element={<AuthLayout />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+      <Suspense fallback={<LoadingLayout />}>
+        <Routes>
+          <Route element={<PublicRoute />}>
+            <Route element={<AuthLayout />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+            </Route>
           </Route>
-        </Route>
-        <Route element={<ProtectedRoute />}>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<DashboardPage />} />
-            <Route path="/service/:serviceCode" element={<PaymentServicePage />} />
-            <Route path="/topup" element={<TopupPage />} />
-            <Route path="/history/transaction" element={<HistoryTransactionPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<DashboardPage />} />
+              <Route path="/service/:serviceCode" element={<PaymentServicePage />} />
+              <Route path="/topup" element={<TopupPage />} />
+              <Route path="/history/transaction" element={<HistoryTransactionPage />} />
+            </Route>
+            <Route path="/akun" element={<ProfilePage />} />
           </Route>
-          <Route path="/akun" element={<ProfilePage />} />
-        </Route>
-      </Routes>
+        </Routes>
+      </Suspense>
       <Toaster
         position="bottom-left"
         toastOptions={{

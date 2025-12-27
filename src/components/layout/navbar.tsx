@@ -22,7 +22,6 @@ export const Navbar = () => {
           <img src="/images/logo.png" alt="" />
           <div className="text-lg font-semibold uppercase">SIMS PPOB</div>
         </Link>
-
         <div className="hidden items-center gap-x-10 lg:flex">
           {NAVIGATION_MENU.map((nav) => (
             <NavLink to={nav.path} key={nav.id}>
@@ -38,11 +37,12 @@ export const Navbar = () => {
             </NavLink>
           ))}
         </div>
-        {/* Open sidebar mobile */}
-        <Button size="icon-lg" onClick={() => setOpen(true)} className="flex lg:hidden">
+        <Button
+          size="icon-lg"
+          onClick={() => setOpen(true)}
+          className="flex cursor-pointer lg:hidden">
           <Menu className="size-6" />
         </Button>
-
         <MobileSidebar open={open} onClose={() => setOpen(false)} />
       </nav>
     </header>
@@ -65,7 +65,7 @@ function MobileSidebar({ open, onClose }: { open: boolean; onClose: () => void }
           open ? 'translate-x-0' : 'translate-x-full'
         )}>
         <div className="flex h-16 items-center justify-between border-b border-gray-300 px-4">
-          <Button size="icon" onClick={onClose}>
+          <Button size="icon" onClick={onClose} className="cursor-pointer">
             <X className="size-5" />
           </Button>
         </div>

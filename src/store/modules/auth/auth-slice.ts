@@ -31,7 +31,7 @@ export const authSlice = createSlice({
       state.token = null;
       state.user = null;
       state.isAuthenticated = false;
-      state.isInitialized = false;
+      state.isInitialized = true;
     },
     restoreAuth: (state, action: PayloadAction<{ token: string }>) => {
       state.token = action.payload.token;

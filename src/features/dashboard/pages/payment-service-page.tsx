@@ -13,7 +13,7 @@ import { formatRupiah } from '@/utils/format';
 
 import { ModalConfirm, ModalFailed, ModalSuccess } from '../components';
 
-export const PaymentServicePage = () => {
+export default function PaymentServicePage() {
   const dispatch = useDispatch();
   const { serviceCode } = useParams();
   const { data: services } = useGetServicesQuery({});
@@ -39,6 +39,7 @@ export const PaymentServicePage = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       setOpenModalFailed(true);
+      setOpenModalConfirm(false);
       toast.error(error.data.message);
     }
   };
@@ -125,4 +126,4 @@ export const PaymentServicePage = () => {
       />
     </>
   );
-};
+}

@@ -22,7 +22,7 @@ const AMOUNT_BUTTONS = [
   { id: 6, value: 500000 },
 ];
 
-export const TopupPage = () => {
+export default function TopupPage() {
   const [topUp, { isLoading }] = useTopUpMutation();
   const navigate = useNavigate();
 
@@ -174,4 +174,4 @@ export const TopupPage = () => {
       />
     </>
   );
-};
+}

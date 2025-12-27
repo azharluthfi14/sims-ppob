@@ -6,7 +6,7 @@ import { setService, useGetBannerQuery, useGetServicesQuery } from '@/store/modu
 
 import { ListMenu, ListPromo } from '../components';
 
-export const DashboardPage = () => {
+export default function DashboardPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -31,4 +31,4 @@ export const DashboardPage = () => {
       <ListPromo banners={banner} isLoading={loadingBanner} />
     </>
   );
-};
+}
