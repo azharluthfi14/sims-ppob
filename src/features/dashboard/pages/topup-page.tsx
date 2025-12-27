@@ -92,7 +92,7 @@ export const TopupPage = () => {
                   render={({ field }) => (
                     <Input
                       type="text"
-                      placeholder="0"
+                      placeholder="Masukan nominal Top Up"
                       value={formatRupiah(field.value || '')}
                       onChange={(event) => {
                         const rawAmount = unformatRupiah(event.target.value);

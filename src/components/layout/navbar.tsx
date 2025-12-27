@@ -52,7 +52,6 @@ export const Navbar = () => {
 function MobileSidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
   return (
     <>
-      {/* Overlay */}
       <div
         className={cn(
           'fixed inset-0 z-40 bg-black/40 transition-opacity lg:hidden',
@@ -60,21 +59,17 @@ function MobileSidebar({ open, onClose }: { open: boolean; onClose: () => void }
         )}
         onClick={onClose}
       />
-
-      {/* Sidebar */}
       <aside
         className={cn(
           'fixed top-0 right-0 z-50 h-full w-64 bg-white shadow-lg transition-transform lg:hidden',
           open ? 'translate-x-0' : 'translate-x-full'
         )}>
-        {/* Header */}
-        <div className="flex h-16 items-center justify-between border-b px-4">
-          <Button size="icon" variant="ghost" onClick={onClose}>
+        <div className="flex h-16 items-center justify-between border-b border-gray-300 px-4">
+          <Button size="icon" onClick={onClose}>
             <X className="size-5" />
           </Button>
         </div>
 
-        {/* Menu */}
         <div className="flex flex-col gap-4 p-4">
           {NAVIGATION_MENU.map((nav) => (
             <NavLink

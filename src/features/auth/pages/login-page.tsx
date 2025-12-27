@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 
 import { type LoginForm, useLoginMutation } from '@/store/modules/auth';
@@ -7,12 +7,10 @@ import { FormLogin } from '../components';
 
 export const LoginPage = () => {
   const [login, { isLoading }] = useLoginMutation();
-  const navigate = useNavigate();
 
   const handleSubmitLogin = async (value: LoginForm) => {
     try {
       await login(value).unwrap();
-      navigate('/');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error(error.data.message);

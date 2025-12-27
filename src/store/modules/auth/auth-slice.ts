@@ -31,7 +31,7 @@ export const authSlice = createSlice({
       state.token = null;
       state.user = null;
       state.isAuthenticated = false;
-      localStorage.removeItem('token');
+      state.isInitialized = false;
     },
     restoreAuth: (state, action: PayloadAction<{ token: string }>) => {
       state.token = action.payload.token;
@@ -39,12 +39,17 @@ export const authSlice = createSlice({
     setInitialized: (state) => {
       state.isInitialized = true;
     },
+    resetAuth: () => {
+      tokenStorage.remove();
+      return initialState;
+    },
   },
   extraReducers: (builder) => {
     builder
       .addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }) => {
         state.token = payload.data.token;
         state.isInitialized = true;
+        state.isAuthenticated = true;
         tokenStorage.set(payload.data.token);
       })
       .addMatcher(authApi.endpoints.getProfile.matchFulfilled, (state, { payload }) => {
@@ -64,5 +69,5 @@ export const authSlice = createSlice({
 
 export const {
   reducer: authReducer,
-  actions: { setAuthToken, logoutUser, restoreAuth, setInitialized },
+  actions: { setAuthToken, logoutUser, restoreAuth, setInitialized, resetAuth },
 } = authSlice;

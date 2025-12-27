@@ -25,7 +25,7 @@ export const MainLayout = () => {
               className="size-14 rounded-full lg:size-20"
             />
             <div className="space-y-1">
-              <h3 className="text-lg lg:text-xl">Selamat datang,</h3>
+              <h3 className="text-base text-gray-500 lg:text-lg">Selamat datang,</h3>
               <h1 className="text-xl font-semibold capitalize lg:text-3xl">
                 {user?.first_name + ' ' + user?.last_name}
               </h1>

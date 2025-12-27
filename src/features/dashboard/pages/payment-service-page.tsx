@@ -9,6 +9,7 @@ import type { RootState } from '@/store';
 import type { Service } from '@/store/modules';
 import { setService, useGetServicesQuery, useTransactionMutation } from '@/store/modules';
 import { cn } from '@/utils/cn';
+import { formatRupiah } from '@/utils/format';
 
 import { ModalConfirm, ModalFailed, ModalSuccess } from '../components';
 
@@ -80,7 +81,7 @@ export const PaymentServicePage = () => {
               type="text"
               placeholder="0"
               className={cn('h-10 rounded border-gray-300 ps-10')}
-              value={selectedService?.tarif}
+              value={selectedService ? formatRupiah(selectedService?.tarif.toString()) : 0}
               readOnly
             />
             <div

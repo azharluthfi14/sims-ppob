@@ -10,8 +10,8 @@ export const DashboardPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { data: banner } = useGetBannerQuery({});
-  const { data: services } = useGetServicesQuery({});
+  const { data: banner, isLoading: loadingBanner } = useGetBannerQuery({});
+  const { data: services, isLoading: loadingService } = useGetServicesQuery({});
 
   const handleClickService = (service: Service) => {
     navigate(`/service/${service.service_code.toLowerCase()}`);
@@ -27,8 +27,8 @@ export const DashboardPage = () => {
 
   return (
     <>
-      <ListMenu services={services} handleClick={handleClickService} />
-      <ListPromo banners={banner} />
+      <ListMenu services={services} isLoading={loadingService} handleClick={handleClickService} />
+      <ListPromo banners={banner} isLoading={loadingBanner} />
     </>
   );
 };
